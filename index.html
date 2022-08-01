@@ -3,19 +3,41 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style type="text/css">
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      canvas {
-        border: 1px solid black;
-      }
-    </style>
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <canvas class="board"></canvas>
-    <script src="index.js"></script>
+    <div class="container">
+      <select name="algorithms">
+        <option value="bubble">Bubble Sort</option>
+        <option value="selection">Selection Sort</option>
+        <option value="insertion">Insertion Sort</option>
+        <option value="merge">Merge Sort</option>
+      </select>
+      <label>Bar Color</label>
+      <input id="bar-color" type="color" value="#000000" />
+      <button id="play">Play</button>
+      <button id="pause">Pause</button>
+      <button id="reset">Reset</button>
+      <button id="speed">Speed</button>
+      <button id="slow">Slow</button>
+    </div>
+    <div class="container">
+      <canvas class="board"></canvas>
+    </div>
+    <div class="container">
+      <h3>Info</h3>
+      <h5 id="name"></h5>
+      <h5 id="reads"></h5>
+      <h5 id="compares"></h5>
+      <h5 id="exchanges"></h5>
+    </div>
+    <script src="js/index.js"></script>
+    <script src="js/algorithms/SortingAlgorithm.js"></script>
+    <script src="js/algorithms/BubbleSort.js"></script>
+    <script src="js/algorithms/SelectionSort.js"></script>
+    <script src="js/algorithms/InsertionSort.js"></script>
+    <script src="js/algorithms/MergeSort.js"></script>
+    <script src="js/load.js"></script>
   </body>
 </html>
