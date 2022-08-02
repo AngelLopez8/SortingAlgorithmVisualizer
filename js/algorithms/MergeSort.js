@@ -5,6 +5,17 @@ class MergeSort extends SortingAlgorithm {
     this.index = 0;
     this.points = [];
     this.merge_sort(0, this.data.length - 1);
+
+    /*********************/
+    this.n1;
+    this.n2;
+    this.L;
+    this.R;
+    this.i;
+    this.j;
+    this.k;
+
+    this.step = 0;
   }
 
   update() {
@@ -14,7 +25,7 @@ class MergeSort extends SortingAlgorithm {
         this.points[this.index].mid,
         this.points[this.index].right
       );
-      this.index++;
+      // this.index++;
 
       this.draw();
     }
@@ -35,40 +46,78 @@ class MergeSort extends SortingAlgorithm {
   }
 
   merge(l, m, r) {
-    let n1 = m - l + 1;
-    let n2 = r - m;
+    /********* INITIAL STEP************/
+    if (this.step === 0) {
+      this.n1 = m - l + 1;
+      this.n2 = r - m;
 
-    let L = new Array(n1).fill();
-    let R = new Array(n2).fill();
+      this.L = new Array(this.n1).fill();
+      this.R = new Array(this.n2).fill();
 
-    for (let i = 0; i < n1; i++) L[i] = this.data[l + i].height;
-    for (let j = 0; j < n2; j++) R[j] = this.data[m + 1 + j].height;
+      /*********************/
+      this.reads += this.n1 - 1 + this.n2 - 1;
+      /*********************/
+      for (let i = 0; i < this.n1; i++) this.L[i] = this.data[l + i].height;
+      for (let j = 0; j < this.n2; j++) this.R[j] = this.data[m + 1 + j].height;
 
-    let i = 0;
-    let j = 0;
-    let k = l;
+      this.i = 0;
+      this.j = 0;
+      this.k = l;
 
-    while (i < n1 && j < n2) {
-      if (L[i] <= R[j]) {
-        this.data[k].height = L[i];
-        i++;
+      this.step++;
+    } else if (this.step === 1) {
+      // while
+      if (this.i < this.n1 && this.j < this.n2) {
+        /*********************/
+        this.compares += 1;
+        /*********************/
+        if (this.L[this.i] <= this.R[this.j]) {
+          /*********************/
+          this.exchanges += 1;
+          /*********************/
+          this.data[this.k].height = this.L[this.i];
+          this.i++;
+        } else {
+          /*********************/
+          this.exchanges += 1;
+          /*********************/
+          this.data[this.k].height = this.R[this.j];
+          this.j++;
+        }
+        this.k++;
       } else {
-        this.data[k].height = R[j];
-        j++;
+        this.step++;
       }
-      k++;
-    }
 
-    while (i < n1) {
-      this.data[k].height = L[i];
-      i++;
-      k++;
-    }
+      // this.step++;
+    } else if (this.step === 2) {
+      /********* SECOND STEP************/
+      // while
+      if (this.i < this.n1) {
+        /*********************/
+        this.exchanges += 1;
+        /*********************/
+        this.data[this.k].height = this.L[this.i];
+        this.i++;
+        this.k++;
+      } else {
+        this.step++;
+      }
+    } else if (this.step === 3) {
+      /********* LAST STEP************/
 
-    while (j < n2) {
-      this.data[k].height = R[j];
-      j++;
-      k++;
+      // while
+      if (this.j < this.n2) {
+        /*********************/
+        this.exchanges += 1;
+        /*********************/
+        this.data[this.k].height = this.R[this.j];
+        this.j++;
+        this.k++;
+      } else {
+        this.index++;
+        this.step = 0;
+      }
     }
   }
 }

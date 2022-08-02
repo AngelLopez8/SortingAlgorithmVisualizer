@@ -5,20 +5,20 @@ canvas.height = window.innerHeight * 0.6;
 
 let ctx = canvas.getContext("2d");
 
-let barColor = "black";
 let speed = 40;
 
 class Rectangle {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, color = "black") {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.color = color;
   }
 
   draw() {
     ctx.setTransform(1, 0, 0, -1, 0, canvas.height); // reverses the coordinate system's y-axis
-    ctx.fillStyle = barColor;
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transforms
   }

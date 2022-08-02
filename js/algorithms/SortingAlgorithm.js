@@ -1,3 +1,5 @@
+const DATALENGTH = 100;
+
 class SortingAlgorithm {
   constructor(name) {
     this.name = name;
@@ -24,8 +26,8 @@ class SortingAlgorithm {
 
 const generateData = () => {
   let data = [];
-  for (let i = 0; i < canvas.width; i++) {
-    let dataWidth = canvas.width / canvas.width;
+  for (let i = 0; i < DATALENGTH; i++) {
+    let dataWidth = canvas.width / DATALENGTH;
     let rec = new Rectangle(
       i * dataWidth,
       0,
